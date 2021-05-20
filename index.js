@@ -17,7 +17,7 @@ $(document).ready(function () {
             $("#list-items").append("<li><input class='checkbox' type='checkbox'>" + item + "<a class='remove'>x</a><hr></li>")
             localStorage.setItem("listItems", $("#list-items").html());
             $("#todo-list-item").val("");
-            $('#victory').remove();
+            takeAwayVictoryImage();
 
         }
     });
@@ -33,18 +33,32 @@ $(document).ready(function () {
         localStorage.setItem("listItems", $("#list-items").html());
 
         if ($(this).parent().hasClass("completed")){
-            $("#victory_image").append("<img id='victory' src='assets/great-job.webp' alt='clapping'>")
+            $('#victory').remove();
+            $("#victory_image").append("<img style='display: none' id='victory' src='assets/great-job.webp' alt='clapping'>")
+            $("#victory").slideDown("slow");
         }
         else{
-            $('#victory').remove();
+            takeAwayVictoryImage();
         }
     });
 
+
     $(document).on("click", ".remove", function(){
-        $(this).parent().remove();
-        localStorage.setItem("listItems", $("#list-items").html());
-        $('#victory').remove();
+        $(this).parent().fadeOut("slow", function(){
+            $(this).remove();
+            console.log($("#list-items").html());
+            localStorage.setItem("listItems", $("#list-items").html());
+            takeAwayVictoryImage();
+        });
+
+
     });
 
-
 });
+
+
+function takeAwayVictoryImage(){
+    $('#victory').slideUp("slow", function(){
+        $(this).remove();
+    });
+}
