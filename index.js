@@ -4,18 +4,20 @@ $(document).ready(function () {
     let today = new Date();
     let fixedDate = today.getMonth()+1 + "/" + today.getDate() + "/" + today.getFullYear();
     $(".container").prepend("<h3 id='date' style='text-align: center'>" + fixedDate + "</h3>")
-    //$(".container").prepend("<h3 id='date' style='text-align: center'>" + 6 + "</h3>")
+
+    $("#list-items").html(localStorage.getItem("listItems"));
 
     if (localStorage.getItem('date') === null){
         localStorage.setItem('date', $("#date").html());
     }else{
         if (localStorage.getItem('date') !== $("#date").html()){
+            console.log($(".completed"))
             $(".completed").remove();
             localStorage.setItem('date', $("#date").html())
+            debugger;
+
         }
     }
-
-    $("#list-items").html(localStorage.getItem("listItems"));
 
     $(".add-items").submit(function (event) {
         event.preventDefault();
