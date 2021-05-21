@@ -4,7 +4,16 @@ $(document).ready(function () {
     let today = new Date();
     let fixedDate = today.getMonth()+1 + "/" + today.getDate() + "/" + today.getFullYear();
     $(".container").prepend("<h3 id='date' style='text-align: center'>" + fixedDate + "</h3>")
+    //$(".container").prepend("<h3 id='date' style='text-align: center'>" + 6 + "</h3>")
 
+    if (localStorage.getItem('date') === null){
+        localStorage.setItem('date', $("#date").html());
+    }else{
+        if (localStorage.getItem('date') !== $("#date").html()){
+            $(".completed").remove();
+            localStorage.setItem('date', $("#date").html())
+        }
+    }
 
     $("#list-items").html(localStorage.getItem("listItems"));
 
@@ -46,7 +55,6 @@ $(document).ready(function () {
     $(document).on("click", ".remove", function(){
         $(this).parent().fadeOut("slow", function(){
             $(this).remove();
-            console.log($("#list-items").html());
             localStorage.setItem("listItems", $("#list-items").html());
             takeAwayVictoryImage();
         });
