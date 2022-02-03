@@ -1,6 +1,4 @@
 $(document).ready(function () {
-    // YOUR CODE HERE!
-
     let today = new Date();
     let fixedDate = today.getMonth()+1 + "/" + today.getDate() + "/" + today.getFullYear();
     $(".container").prepend("<h3 id='date' style='text-align: center'>" + fixedDate + "</h3>")
@@ -11,11 +9,8 @@ $(document).ready(function () {
         localStorage.setItem('date', $("#date").html());
     }else{
         if (localStorage.getItem('date') !== $("#date").html()){
-            console.log($(".completed"))
             $(".completed").remove();
             localStorage.setItem('date', $("#date").html())
-            debugger;
-
         }
     }
 
